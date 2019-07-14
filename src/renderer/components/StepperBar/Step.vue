@@ -2,15 +2,7 @@
   <div class="step-container">
     <div class="step-circle">
       <div>
-        <img v-if="icon === 'crop'" src="~@/assets/baseline-crop-24px.svg" />
-        <img
-          v-if="icon === 'config'"
-          src="~@/assets/baseline-settings-20px.svg"
-        />
-        <img
-          v-if="icon === 'sprite'"
-          src="~@/assets/baseline-insert_photo-24px.svg"
-        />
+        <i class="material-icons">{{ icon }}</i>
       </div>
     </div>
     <div class="action">{{ action }}</div>
@@ -46,6 +38,9 @@ export default {
     border: 4px solid $color-border-light;
     border-radius: 100%;
     cursor: pointer;
+    :hover {
+      color: gray;
+    }
   }
 
   .action {
@@ -53,9 +48,11 @@ export default {
   }
 }
 
-img {
+i {
   width: 100%;
   padding: 0.5rem;
-  color: red;
+  font-size: 2rem;
+  color: $color-icon-light;
+  text-align: center;
 }
 </style>

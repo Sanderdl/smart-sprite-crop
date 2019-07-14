@@ -16,6 +16,7 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 * {
   box-sizing: border-box;
