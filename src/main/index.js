@@ -1,6 +1,7 @@
 'use strict'
 
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain, dialog } from 'electron'
+import FileOperations from './FileOperations'
 
 /**
  * Set `__static` path to static files in production
@@ -44,6 +45,21 @@ app.on('activate', () => {
   if (mainWindow === null) {
     createWindow()
   }
+})
+
+ipcMain.on('open-file-dialog', (e, includeSubfolder) => {
+  dialog.showOpenDialog({
+    properties: ['openDirectory']
+    // filters: [{name: 'images: .png, .jpg, .bmp', extensions: ['png', 'jpg', 'bmp']}]
+  }, (path) => {
+    if (path) {
+      let folder = path[0]// path[0].slice(0, -4)
+
+      let result = FileOperations.countFilesAndFolders(folder, includeSubfolder)
+
+      e.sender.send('selected-folder', result)
+    }
+  })
 })
 
 /**

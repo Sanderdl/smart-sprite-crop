@@ -1,13 +1,17 @@
 <template>
   <div class="wrapper">
     <div class="container">
-      <div class="icon-block">
+      <div @click="folderClicked" class="icon-block">
         <i class="material-icons">folder</i>
-        <p class="amount">0</p>
+        <p class="amount">{{ selectedAmount }}</p>
       </div>
       <div class="instructions">
-        Drag &amp; drop sprites/folders or select a folder
+        <p v-if="selectedAmount === 0">
+          Drag &amp; drop sprites/folders or select a folder
+        </p>
+        <p v-else>{{ selectedPath }}</p>
       </div>
+
       <div class="checkbox">
         <checkbox
           v-on:checked="onChecked"
@@ -21,6 +25,7 @@
 
 <script>
 import Checkbox from '../controles/Checkbox'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'select-sprites',
@@ -30,10 +35,25 @@ export default {
       includeSubfolders: true
     }
   },
+  computed: mapGetters(['selectedAmount', 'selectedPath']),
   methods: {
+    ...mapActions(['setSelectedAmount', 'setSelectedPath', 'setFileList']),
     onChecked() {
       this.includeSubfolders = !this.includeSubfolders
+    },
+    folderClicked() {
+      this.$electron.ipcRenderer.send(
+        'open-file-dialog',
+        this.includeSubfolders
+      )
     }
+  },
+  created() {
+    this.$electron.ipcRenderer.on('selected-folder', (event, result) => {
+      this.$store.dispatch('setSelectedAmount', result.fileList.length)
+      this.$store.dispatch('setSelectedPath', result.path)
+      this.$store.dispatch('setFileList', result.fileList)
+    })
   }
 }
 </script>
