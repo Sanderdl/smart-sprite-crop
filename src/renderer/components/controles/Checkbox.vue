@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <div class="check-container">
     <div @click="toggleChecked" class="box" v-bind:class="{ checked: checked }">
-      <i class="material-icons">done</i>
+      <i v-if="checked" class="material-icons">done</i>
     </div>
     <div class="text">{{ text }}</div>
   </div>
@@ -29,7 +29,7 @@ export default {
 <style scoped lang=scss>
 @import '../../_config.scss';
 
-.container {
+.check-container {
   height: 40px;
 }
 
