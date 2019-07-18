@@ -38,10 +38,13 @@ const countDraggedFiles = (files, includeSubfolders) => {
       } else {
         folderCount++
       }
+    } else if (!fs.statSync(file).isDirectory()) {
+      allFiles.push(file)
     }
   })
 
   allFiles = allFiles.filter(f => { return fileFilter.includes(pathfs.extname(f)) })
+  allFiles = [...new Set(allFiles)]
 
   return {path: path, fileList: allFiles, folderCount}
 }
