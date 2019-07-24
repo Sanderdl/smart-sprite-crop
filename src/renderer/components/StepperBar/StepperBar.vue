@@ -1,8 +1,8 @@
 <template>
   <div class="stepper-bar shadow-md">
-    <step action="Select sprites" icon="sprite"> </step>
+    <step action="Select sprites" icon="collections"> </step>
     <div class="line"></div>
-    <step action="Configure options" icon="config"></step>
+    <step action="Configure options" icon="settings"></step>
     <div class="line"></div>
     <step action="Crop sprites!" icon="crop"></step>
   </div>

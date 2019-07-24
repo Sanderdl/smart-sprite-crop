@@ -1,6 +1,7 @@
 'use strict'
 
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain, dialog } from 'electron'
+import FileOperations from './FileOperations'
 
 /**
  * Set `__static` path to static files in production
@@ -32,7 +33,9 @@ function createWindow () {
   })
 }
 
-app.on('ready', createWindow)
+app.on('ready', () => {
+  createWindow()
+})
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -44,6 +47,25 @@ app.on('activate', () => {
   if (mainWindow === null) {
     createWindow()
   }
+})
+
+ipcMain.on('open-file-dialog', (e, includeSubfolder) => {
+  dialog.showOpenDialog({
+    properties: ['openDirectory']
+  }, (path) => {
+    if (path) {
+      const folder = path[0]
+
+      const result = FileOperations.countFilesAndFolders(folder, includeSubfolder)
+
+      e.sender.send('selected-folder', result)
+    }
+  })
+})
+
+ipcMain.on('files-dropped', (e, files) => {
+  const result = FileOperations.countDraggedFiles(files.files, files.includeSubfolders)
+  e.sender.send('selected-folder', result)
 })
 
 /**
