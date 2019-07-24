@@ -11,6 +11,11 @@ export default new Router({
       component: require('@/components/SelectSprites/SelectSprites').default
     },
     {
+      path: '/config',
+      name: 'config-options',
+      component: require('@/components/Configuration/ConfigOptions').default
+    },
+    {
       path: '*',
       redirect: '/'
     }

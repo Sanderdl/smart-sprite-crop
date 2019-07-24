@@ -52,10 +52,9 @@ app.on('activate', () => {
 ipcMain.on('open-file-dialog', (e, includeSubfolder) => {
   dialog.showOpenDialog({
     properties: ['openDirectory']
-    // filters: [{name: 'images: .png, .jpg, .bmp', extensions: ['png', 'jpg', 'bmp']}]
   }, (path) => {
     if (path) {
-      const folder = path[0]// path[0].slice(0, -4)
+      const folder = path[0]
 
       const result = FileOperations.countFilesAndFolders(folder, includeSubfolder)
 
@@ -66,7 +65,6 @@ ipcMain.on('open-file-dialog', (e, includeSubfolder) => {
 
 ipcMain.on('files-dropped', (e, files) => {
   const result = FileOperations.countDraggedFiles(files.files, files.includeSubfolders)
-  console.log(result)
   e.sender.send('selected-folder', result)
 })
 

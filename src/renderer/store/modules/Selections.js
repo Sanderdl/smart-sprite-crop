@@ -1,19 +1,24 @@
 
 const state = {
-  selectedAmount: 0,
+  spriteCount: 0,
+  folderCount: 1,
   selectedPath: '',
   fileList: []
 }
 
 const getters = {
-  selectedAmount: state => state.selectedAmount,
+  spriteCount: state => state.spriteCount,
+  folderCount: state => state.folderCount,
   selectedPath: state => state.selectedPath,
   fileList: state => state.fileList
 }
 
 const actions = {
-  setSelectedAmount({ commit }, amount) {
-    commit('setSelectedAmount', amount)
+  setSpriteCount({ commit }, amount) {
+    commit('setSpriteCount', amount)
+  },
+  setFolderCount({ commit }, amount) {
+    commit('setFolderCount', amount)
   },
   setSelectedPath({ commit }, path) {
     commit('setSelectedPath', path)
@@ -24,8 +29,12 @@ const actions = {
 }
 
 const mutations = {
-  setSelectedAmount: (state, amount) => {
-    state.selectedAmount = amount
+  setSpriteCount: (state, amount) => {
+    state.spriteCount = amount
+  },
+  setFolderCount: (state, amount) => {
+    const count = amount <= 0 ? 1 : amount
+    state.folderCount = count
   },
   setSelectedPath: (state, path) => {
     state.selectedPath = path

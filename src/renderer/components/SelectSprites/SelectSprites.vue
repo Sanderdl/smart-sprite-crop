@@ -10,13 +10,11 @@
     >
       <div @click="folderClicked" class="icon-block">
         <i class="material-icons">folder</i>
-        <p class="amount">{{ selectedAmount }}</p>
       </div>
       <div class="instructions">
-        <p v-if="selectedAmount === 0">
+        <p>
           Drag &amp; drop sprites/folders or select a folder
         </p>
-        <p v-else>{{ selectedPath }}</p>
       </div>
 
       <div class="checkbox">
@@ -37,10 +35,15 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'select-sprites',
   components: { Checkbox },
-  computed: mapGetters(['selectedAmount', 'selectedPath', 'includeSubfolders']),
+  computed: mapGetters(['spriteCount', 'selectedPath', 'includeSubfolders']),
   data() {
     return {
       dragging: false
+    }
+  },
+  watch: {
+    spriteCount: function() {
+      this.$router.push('config')
     }
   },
   methods: {
@@ -76,7 +79,8 @@ export default {
   },
   created() {
     this.$electron.ipcRenderer.on('selected-folder', (event, result) => {
-      this.$store.dispatch('setSelectedAmount', result.fileList.length)
+      this.$store.dispatch('setSpriteCount', result.fileList.length)
+      this.$store.dispatch('setFolderCount', result.folderCount)
       this.$store.dispatch('setSelectedPath', result.path)
       this.$store.dispatch('setFileList', result.fileList)
     })
@@ -122,16 +126,6 @@ export default {
   i:hover {
     opacity: 0.75;
   }
-}
-
-.amount {
-  color: white;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 40px;
-  text-align: center;
-  font-size: 1.2rem;
 }
 
 i {

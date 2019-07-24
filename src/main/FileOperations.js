@@ -25,7 +25,7 @@ const countFilesAndFolders = (path, includeSubfolders) => {
 }
 
 const countDraggedFiles = (files, includeSubfolders) => {
-  let folderCount = 0
+  let folderCount = 1
   let allFiles = []
   const path = pathfs.dirname(files[0])
 

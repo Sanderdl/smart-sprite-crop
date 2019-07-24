@@ -37,10 +37,6 @@ export default {
     box-sizing: content-box;
     border: 4px solid $color-border-light;
     border-radius: 100%;
-    cursor: pointer;
-    :hover {
-      color: gray;
-    }
   }
 
   .action {
