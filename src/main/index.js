@@ -49,6 +49,8 @@ app.on('activate', () => {
   }
 })
 
+app.commandLine.appendSwitch('force-color-profile', 'srgb')
+
 ipcMain.on('open-file-dialog', (e, includeSubfolder) => {
   dialog.showOpenDialog({
     properties: ['openDirectory']

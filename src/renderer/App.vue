@@ -14,9 +14,11 @@ export default {
 }
 </script>
 
-<style>
+<style lang=scss>
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+@import './_config.scss';
 
 * {
   box-sizing: border-box;
@@ -38,6 +40,10 @@ html {
 }
 
 .shadow-md {
-  box-shadow: -1px 3px 6px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 3px 1px 0px rgba(0, 0, 0, 0.25);
+}
+
+i {
+  color: $color-icon-light;
 }
 </style>

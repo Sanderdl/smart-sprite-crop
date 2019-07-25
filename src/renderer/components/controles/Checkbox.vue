@@ -44,6 +44,7 @@ export default {
   color: white;
   i {
     font-size: 1.6rem;
+    color: white;
   }
 }
 

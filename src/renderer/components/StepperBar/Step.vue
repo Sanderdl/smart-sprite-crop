@@ -48,7 +48,6 @@ i {
   width: 100%;
   padding: 0.5rem;
   font-size: 2rem;
-  color: $color-icon-light;
   text-align: center;
 }
 </style>
