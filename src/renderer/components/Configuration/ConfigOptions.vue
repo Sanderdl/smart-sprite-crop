@@ -17,11 +17,13 @@
       </div>
     </div>
     <div class="center row config">
-      <div class="shadow-md box border"></div>
+      <div class="shadow-md box border">
+        <constraints />
+      </div>
       <div class="shadow-md box border"></div>
       <div class="shadow-md box border"></div>
     </div>
-    <div class="row"><ProgressBar :completed="20" /></div>
+    <div class="row"><ProgressBar :completed="75" /></div>
     <div class="button row box">
       <Button :onClick="cropSprites" important>Crop!</Button>
     </div>
@@ -31,11 +33,12 @@
 <script>
 import Button from '../controles/Button'
 import ProgressBar from '../controles/ProgressBar'
+import Constraints from '../Configuration/Constraints'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'config-options',
-  components: { Button, ProgressBar },
+  components: { Button, ProgressBar, Constraints },
   computed: mapGetters(['spriteCount', 'folderCount']),
   methods: {
     clearSelection() {

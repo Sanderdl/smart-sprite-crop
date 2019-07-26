@@ -25,11 +25,15 @@ export default {
 }
 
 .number {
+  margin: auto;
   position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   color: white;
-  top: 2px;
-  left: 50%;
   font-weight: 900;
+  text-align: center;
 }
 
 .fill {
