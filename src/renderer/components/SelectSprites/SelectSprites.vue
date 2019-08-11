@@ -35,7 +35,12 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'select-sprites',
   components: { Checkbox },
-  computed: mapGetters(['spriteCount', 'selectedPath', 'includeSubfolders']),
+  computed: mapGetters([
+    'spriteCount',
+    'selectedPath',
+    'includeSubfolders',
+    'steps'
+  ]),
   data() {
     return {
       dragging: false
@@ -44,6 +49,7 @@ export default {
   watch: {
     spriteCount: function() {
       this.$router.push('config')
+      this.$store.dispatch('toggleCompleteStep', 1)
     }
   },
   methods: {
@@ -78,6 +84,9 @@ export default {
     }
   },
   created() {
+    if (this.steps[0].complete) {
+      this.$router.push('config')
+    }
     this.$electron.ipcRenderer.on('selected-folder', (event, result) => {
       this.$store.dispatch('setSpriteCount', result.fileList.length)
       this.$store.dispatch('setFolderCount', result.folderCount)

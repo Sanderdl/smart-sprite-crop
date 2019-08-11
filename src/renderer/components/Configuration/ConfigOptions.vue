@@ -20,7 +20,9 @@
       <div class="shadow-md box border">
         <constraints />
       </div>
-      <div class="shadow-md box border"></div>
+      <div class="shadow-md box border">
+        <back-color />
+      </div>
       <div class="shadow-md box border"></div>
     </div>
     <div class="row"><ProgressBar :completed="75" /></div>
@@ -33,16 +35,17 @@
 <script>
 import Button from '../controles/Button'
 import ProgressBar from '../controles/ProgressBar'
-import Constraints from '../Configuration/Constraints'
+import Constraints from './Constraints'
+import BackColor from './BackColor'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'config-options',
-  components: { Button, ProgressBar, Constraints },
+  components: { Button, ProgressBar, Constraints, BackColor },
   computed: mapGetters(['spriteCount', 'folderCount']),
   methods: {
     clearSelection() {
-      console.log('clear selection')
+      this.$store.dispatch('toggleCompleteStep', 1)
       this.$router.replace('/')
     },
     cropSprites() {

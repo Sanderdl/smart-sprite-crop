@@ -1,8 +1,9 @@
 <template>
   <div class="step-container">
-    <div class="step-circle">
+    <div class="step-circle" v-bind:class="{ complete: completed }">
       <div>
-        <i class="material-icons">{{ icon }}</i>
+        <i v-if="!completed" class="material-icons">{{ icon }}</i>
+        <i v-else class="material-icons check">check</i>
       </div>
     </div>
     <div class="action">{{ action }}</div>
@@ -18,6 +19,9 @@ export default {
     },
     icon: {
       required: false
+    },
+    completed: {
+      required: true
     }
   }
 }
@@ -37,6 +41,14 @@ export default {
     box-sizing: content-box;
     border: 4px solid $color-border-light;
     border-radius: 100%;
+  }
+
+  .complete {
+    border: 4px solid $color-primary;
+  }
+
+  .check {
+    color: $color-primary;
   }
 
   .action {

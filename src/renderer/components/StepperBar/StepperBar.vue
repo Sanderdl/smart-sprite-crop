@@ -1,19 +1,25 @@
 <template>
   <div class="stepper-bar shadow-md">
-    <step action="Select sprites" icon="collections"> </step>
-    <div class="line"></div>
-    <step action="Configure options" icon="settings"></step>
-    <div class="line"></div>
-    <step action="Crop sprites!" icon="crop"></step>
+    <template v-for="(step, index) in steps">
+      <step
+        v-bind:action="step.action"
+        v-bind:icon="step.icon"
+        v-bind:completed="step.complete"
+      >
+      </step>
+      <div v-if="index < steps.length - 1" class="line"></div>
+    </template>
   </div>
 </template>
 
 <script>
 import Step from './Step'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'stepper-bar',
-  components: { Step }
+  components: { Step },
+  computed: mapGetters(['steps'])
 }
 </script>
 
