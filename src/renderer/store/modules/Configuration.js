@@ -9,7 +9,9 @@ const state = {
   },
   backgroundStrategy: 'auto',
   backgroundColor: '#ff0000',
-  autoStrategy: 'top-left'
+  autoStrategy: 'top-left',
+  outputStrategy: 'overwrite',
+  prefix: ''
 }
 
 const getters = {
@@ -17,7 +19,9 @@ const getters = {
   constraints: state => state.constraints,
   backgroundStrategy: state => state.backgroundStrategy,
   backgroundColor: state => state.backgroundColor,
-  autoStrategy: state => state.autoStrategy
+  autoStrategy: state => state.autoStrategy,
+  outputStrategy: state => state.outputStrategy,
+  prefix: state => state.prefix
 }
 
 const actions = {
@@ -35,6 +39,12 @@ const actions = {
   },
   setAutoStrategy({commit}, strategy) {
     commit('setAutoStrategy', strategy)
+  },
+  setOutputStrategy({commit}, strategy) {
+    commit('setOutputStrategy', strategy)
+  },
+  setPrefix({commit}, prefix) {
+    commit('setPrefix', prefix)
   }
 }
 
@@ -53,6 +63,12 @@ const mutations = {
   },
   setAutoStrategy: (state, strategy) => {
     state.autoStrategy = strategy
+  },
+  setOutputStrategy: (state, strategy) => {
+    state.OutputStrategy = strategy
+  },
+  setPrefix: (state, prefix) => {
+    state.prefix = prefix
   }
 }
 

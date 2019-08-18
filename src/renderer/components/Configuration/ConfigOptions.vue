@@ -1,33 +1,38 @@
 <template>
-  <div class="wrapper">
-    <div class="center row selection shadow-md border">
-      <div class="box">
+  <div class="center">
+    <div class="config-wrapper">
+      <div class="center row selection shadow-md border">
         <div class="box">
-          <i class="material-icons">collections</i>&nbsp;
-          {{ spriteCount }} sprite(s)
+          <div class="box">
+            <i class="material-icons">collections</i>&nbsp;
+            {{ spriteCount }} sprite(s)
+          </div>
+        </div>
+        <div class="box">
+          <div class="box">
+            <i class="material-icons">folder</i>&nbsp;
+            {{ folderCount }} folder(s)
+          </div>
+        </div>
+        <div class="box">
+          <Button :onClick="clearSelection">Clear sprites</Button>
         </div>
       </div>
-      <div class="box">
-        <div class="box">
-          <i class="material-icons">folder</i>&nbsp; {{ folderCount }} folder(s)
+      <div class="center row config">
+        <div class="shadow-md box border">
+          <constraints />
+        </div>
+        <div class="shadow-md box border">
+          <back-color />
+        </div>
+        <div class="shadow-md box border">
+          <file-output />
         </div>
       </div>
-      <div class="box">
-        <Button :onClick="clearSelection">Clear sprites</Button>
+      <div class="row"><ProgressBar :completed="75" /></div>
+      <div class="button row box">
+        <Button :onClick="cropSprites" important>Crop!</Button>
       </div>
-    </div>
-    <div class="center row config">
-      <div class="shadow-md box border">
-        <constraints />
-      </div>
-      <div class="shadow-md box border">
-        <back-color />
-      </div>
-      <div class="shadow-md box border"></div>
-    </div>
-    <div class="row"><ProgressBar :completed="75" /></div>
-    <div class="button row box">
-      <Button :onClick="cropSprites" important>Crop!</Button>
     </div>
   </div>
 </template>
@@ -37,11 +42,13 @@ import Button from '../controles/Button'
 import ProgressBar from '../controles/ProgressBar'
 import Constraints from './Constraints'
 import BackColor from './BackColor'
+import FileOutput from './FileOuput'
+
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'config-options',
-  components: { Button, ProgressBar, Constraints, BackColor },
+  components: { Button, ProgressBar, Constraints, BackColor, FileOutput },
   computed: mapGetters(['spriteCount', 'folderCount']),
   methods: {
     clearSelection() {
@@ -60,8 +67,15 @@ export default {
 
 $box-size: 15.5rem;
 
-.wrapper {
-  padding-top: 3%;
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.config-wrapper {
   width: 80%;
   max-width: 800px;
   margin: 0 auto;
@@ -90,6 +104,7 @@ $box-size: 15.5rem;
   align-items: center;
   justify-content: center;
   min-width: $box-size;
+  max-height: 244px;
 }
 
 .config {

@@ -34,9 +34,13 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-body,
 html {
-  height: 80vh;
+  height: 90%;
+  overflow-y: hidden;
+}
+
+body {
+  height: 100%;
 }
 
 .shadow-md {
